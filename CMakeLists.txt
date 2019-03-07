@@ -57,7 +57,7 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR
    CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   # Update if necessary
   set(CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -std=c++1z -Wall -Wextra -stdlib=libc++ -fno-rtti")
+    "${CMAKE_CXX_FLAGS} -std=gnu++17 -Wall -Wextra -fno-rtti")
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
   set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O2 -g")
@@ -85,7 +85,7 @@ add_definitions(${LLVM_DEFINITIONS})
 message(STATUS ${LLVM_DEFINITIONS})
 # Find the libraries that correspond to the LLVM components
 # that we wish to use
-llvm_map_components_to_libnames(LLVM_LIBS core support demangle mcjit native)
+llvm_map_components_to_libnames(LLVM_LIBS core support demangle orcjit native executionengine object scalaropts instcombine)
 message(STATUS ${LLVM_LIBS})
 
 # Create the main program

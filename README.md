@@ -1,3 +1,5 @@
+[snowzurfer/brto-llvm](https://github.com/snowzurfer/brto-llvm) ported to LLVM 7.x
+
 # brto-llvm
 Modern C++ implementation of the Kaleidoscope LLVM tutorial.
 

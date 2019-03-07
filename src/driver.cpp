@@ -27,9 +27,11 @@
 #include <visitor.hpp>
 #include <ast.hpp>
 #include <llvm/IR/Verifier.h>
+#include <llvm/Support/Error.h>
 #include <llvm/Support/TargetSelect.h>
 #include <llvm/Support/TargetSelect.h>
 #include <llvm/Target/TargetMachine.h>
+#include <llvm/Transforms/InstCombine/InstCombine.h>
 #include <llvm/Transforms/Scalar.h>
 #include <llvm/Transforms/Scalar/GVN.h>
 
@@ -179,7 +181,8 @@ void Driver::ExecTopLvlModule() {
   // Get the symbol's address and cast it to the required type
   // (which takes no arguments, returns a double) so we can call it as
   // a native function
-  double (*fp)() = (double (*)())(intptr_t)expr_sym.getAddress();
+  llvm::ExitOnError ExitOnError;
+  double (*fp)() = (double (*)())(uintptr_t)ExitOnError(expr_sym.getAddress());
   // Evaluate it
   std::cerr << ">>> " << fp() << "\n";
 
